@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.cryptotracker.ui.splash.StartFragment"
+        android:label="StartFragment"
+        tools:layout="@layout/fragment_start" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.cryptotracker.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/minMaxFragment"
+        android:name="com.example.cryptotracker.ui.min_max.MinMaxFragment"
+        android:label="MinMaxFragment"
+        tools:layout="@layout/fragment_min_max_rate" />
+</navigation>
