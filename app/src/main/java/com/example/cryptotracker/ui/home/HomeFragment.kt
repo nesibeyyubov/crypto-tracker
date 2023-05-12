@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.cryptotracker.R
 import com.example.cryptotracker.base.BaseFragment
 import com.example.cryptotracker.databinding.FragmentHomeBinding
+import com.example.cryptotracker.utils.Constants.KEY_COIN
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,21 +29,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeState, HomeViewModel>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.getCoins()
     }
 
     override fun initViews() = with(binding) {
         rvCoins.adapter = cryptoAdapter
-        ivProfile.setOnClickListener { navigate(R.id.minMaxFragment) }
+        cryptoAdapter.onItemClickListener = { coin ->
+            navigate(R.id.minMaxFragment, bundleOf(KEY_COIN to coin))
+        }
+
+
+        etSearch.doAfterTextChanged { viewModel.search(it.toString().trim()) }
+
+        Unit
     }
 
-    override fun render(state: HomeState) {
-        if (state.loading) {
-            return
-        }
+    override fun render(state: HomeState) = with(binding) {
+        shimmer.isVisible = state.loading
+        rvCoins.isVisible = !state.loading
+
         if (state.coins.isNullOrEmpty().not()) {
-            cryptoAdapter.submitList(state.coins)
+            cryptoAdapter.submitList(state.coins?.filter { it.name.contains(state.query, ignoreCase = true) })
         }
     }
 }

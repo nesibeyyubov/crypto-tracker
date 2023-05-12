@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -48,6 +49,11 @@ abstract class BaseFragment<
         changeStatusBarIconColor(iconsShouldBeLight = true)
     }
 
+    fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG)
+            .show()
+    }
+
     fun makeFragmentFullScreen() = with(binding) {
         root.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -73,10 +79,9 @@ abstract class BaseFragment<
 
     fun navigate(
         screenId: Int,
-        navOptions: NavOptions? = null
+        arguments: Bundle? = null,
     ) {
-
-        findNavController().navigate(screenId, Bundle(), navOptions)
+        findNavController().navigate(screenId, arguments)
     }
 
     fun changeStatusBarIconColor(iconsShouldBeLight: Boolean) {

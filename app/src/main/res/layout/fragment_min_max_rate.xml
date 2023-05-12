@@ -8,7 +8,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/btn_start"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,7 +77,7 @@
 
 
             <View
-                android:id="@+id/view"
+                android:id="@+id/vertical_view"
                 android:layout_width="10dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="16dp"
@@ -97,8 +97,8 @@
                 android:textColor="@color/white"
                 android:textSize="40sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@+id/view" />
+                app:layout_constraintStart_toEndOf="@+id/vertical_view"
+                app:layout_constraintTop_toTopOf="@+id/vertical_view" />
 
             <TextView
                 android:id="@+id/tv_percentage"
@@ -111,8 +111,8 @@
                 android:text="+18 %"
                 android:textColor="@color/green"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/view"
-                app:layout_constraintStart_toEndOf="@+id/view" />
+                app:layout_constraintBottom_toBottomOf="@id/vertical_view"
+                app:layout_constraintStart_toEndOf="@+id/vertical_view" />
 
             <androidx.constraintlayout.helper.widget.Flow
                 android:layout_width="match_parent"
@@ -122,7 +122,7 @@
                 android:orientation="horizontal"
                 app:constraint_referenced_ids="et_min,et_max"
                 app:flow_horizontalGap="16dp"
-                app:layout_constraintTop_toBottomOf="@id/view" />
+                app:layout_constraintTop_toBottomOf="@id/vertical_view" />
 
 
             <EditText
@@ -136,6 +136,7 @@
                 android:drawablePadding="10dp"
                 android:drawableTint="#ABABAB"
                 android:hint="Minimum rate"
+                android:inputType="numberDecimal"
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:textColorHint="#ABABAB" />
@@ -151,6 +152,7 @@
                 android:drawablePadding="10dp"
                 android:drawableTint="#ABABAB"
                 android:hint="Maximum rate"
+                android:inputType="numberDecimal"
                 android:paddingHorizontal="10dp"
                 android:textColor="@color/white"
                 android:textColorHint="#ABABAB" />
@@ -160,7 +162,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_start"
+        android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginHorizontal="16dp"

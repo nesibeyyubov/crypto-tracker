@@ -7,6 +7,7 @@ import com.example.cryptotracker.utils.Constants.BITCOIN
 import com.example.cryptotracker.utils.Constants.ETHEREUM
 import com.example.cryptotracker.utils.Constants.RIPPLE
 import com.example.cryptotracker.utils.Constants.USD
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

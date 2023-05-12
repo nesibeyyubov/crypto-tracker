@@ -30,4 +30,8 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
+    fun search(query: String) {
+        setState { it.copy(query = query) }
+    }
+
 }

@@ -10,4 +10,5 @@
 
     <color name="transparent">#00FFFFFF</color>
     <color name="green">#6EDA2A</color>
+    <color name="red">#FF5656</color>
 </resources>

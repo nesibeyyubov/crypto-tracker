@@ -14,6 +14,7 @@ interface CryptoApi {
         @Query("include_24hr_vol") include24hrVol: Boolean = true,
         @Query("include_24hr_change") include24hrChangel: Boolean = true,
         @Query("include_last_updated_at") includeLastUpdatedAt: Boolean = true,
+        @Query("precision") precision: Int = 2
     ): CoinsResponse
 
 }

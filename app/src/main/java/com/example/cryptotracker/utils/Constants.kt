@@ -15,4 +15,9 @@ object Constants {
     const val USD_24H_CHANGE = "usd_24h_change"
     const val LAST_UPDATED_AT = "last_updated_at"
 
+    const val KEY_COIN = "coin"
+
+    const val KEY_MIN = "min"
+    const val KEY_MAX = "max"
+
 }
