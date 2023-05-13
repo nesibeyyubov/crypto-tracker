@@ -12,6 +12,8 @@ import com.example.cryptotracker.data.background_work.CryptoWorker
 import com.example.cryptotracker.data.local.preferences.PreferencesDataStore
 import com.example.cryptotracker.data.models.Coin
 import com.example.cryptotracker.utils.Constants.CRYPTO_WORKER_NAME
+import com.example.cryptotracker.utils.CryptoNotificationManager
+import com.example.cryptotracker.utils.inMoneyFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -25,11 +27,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MinMaxViewmodel @Inject constructor(
     private val preferencesDataStore: PreferencesDataStore,
-    private val workManager: WorkManager
+    private val workManager: WorkManager,
+    private val notificationManager: CryptoNotificationManager
 ) : BaseViewModel<MinMaxState>(MinMaxState()) {
 
-
-    private fun startTrackingCryptoRates() {
+    private fun startTrackingCryptoRates(message: String) {
         val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
         val request = PeriodicWorkRequest.Builder(CryptoWorker::class.java, 15L, TimeUnit.MINUTES)
             .setConstraints(constraints)
@@ -39,10 +41,13 @@ class MinMaxViewmodel @Inject constructor(
             ExistingPeriodicWorkPolicy.UPDATE,
             request
         )
+        notificationManager.showBackgroundWorkStarted(message)
     }
 
     fun saveMinMax(coin: Coin, min: Float, max: Float) {
-        startTrackingCryptoRates()
+        startTrackingCryptoRates(
+            "You will receive notification when ${coin.name} is between range [${min.inMoneyFormat()}$-${max.inMoneyFormat()}$]",
+        )
         viewModelScope.launch {
             preferencesDataStore.setMinMax(coin, min, max)
         }
