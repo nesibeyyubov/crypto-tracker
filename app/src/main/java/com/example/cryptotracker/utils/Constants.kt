@@ -20,4 +20,6 @@ object Constants {
     const val KEY_MIN = "min"
     const val KEY_MAX = "max"
 
+    const val CRYPTO_WORKER_NAME = "crypto_worker"
+
 }

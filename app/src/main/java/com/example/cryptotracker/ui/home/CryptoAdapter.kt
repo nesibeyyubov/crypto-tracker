@@ -6,8 +6,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
-import com.example.cryptotracker.base.BaseListAdapter
 import com.example.cryptotracker.data.models.Coin
 import com.example.cryptotracker.data.models.percentageColor
 import com.example.cryptotracker.databinding.ItemCoinBinding
