@@ -32,7 +32,7 @@
     <td valign="top"><img src="https://i.ibb.co/RyWBsMY/Screenshot-1684065737.png"></td>
     <td valign="top"><img src="https://i.ibb.co/svzFhQ9/Screenshot-1684065630.png"></td>
     <td valign="top"><img src="https://i.ibb.co/nmkDc3n/Screenshot-1684065627.png"></td>
-    <td valign="top"><img src="[https://i.ibb.co/Y7H5B92/signup.png](https://i.ibb.co/BB2xb5T/Screenshot-1684065624.png)"></td>
+    <td valign="top"><img src="https://i.ibb.co/BB2xb5T/Screenshot-1684065624.png"></td>
   </tr>
  
 
