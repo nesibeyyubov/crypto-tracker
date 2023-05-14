@@ -3,6 +3,7 @@ package com.example.cryptotracker.data.local.preferences
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -13,9 +14,11 @@ import com.example.cryptotracker.utils.Constants.ETHEREUM
 import com.example.cryptotracker.utils.Constants.KEY_MAX
 import com.example.cryptotracker.utils.Constants.KEY_MIN
 import com.example.cryptotracker.utils.Constants.RIPPLE
+import com.example.cryptotracker.utils.Constants.SPLASH_SEEN_KEY
 import com.example.cryptotracker.utils.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -31,6 +34,7 @@ class PreferencesDataStore @Inject constructor(@ApplicationContext context: Cont
     private val ethereumKey = stringPreferencesKey(ETHEREUM)
     private val rippleKey = stringPreferencesKey(RIPPLE)
 
+    private val splashSeenKey = booleanPreferencesKey(SPLASH_SEEN_KEY)
 
     suspend fun setMinMax(coin: Coin, min: Float, max: Float) {
         dataStore.edit {
@@ -40,6 +44,16 @@ class PreferencesDataStore @Inject constructor(@ApplicationContext context: Cont
                 CoinType.Ripple -> rippleKey
             }
             it[key] = "$min$MIN_MAX_SEPARATOR$max"
+        }
+    }
+
+    suspend fun setSplashScreenSeen() {
+        dataStore.edit { it[splashSeenKey] = true }
+    }
+
+    fun getSplashScreenSeen(): Flow<Boolean> {
+        return dataStore.data.map {
+            it[splashSeenKey] ?: false
         }
     }
 

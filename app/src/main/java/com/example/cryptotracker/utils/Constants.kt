@@ -21,6 +21,7 @@ object Constants {
     const val KEY_COIN = "coin"
     const val KEY_MIN = "min"
     const val KEY_MAX = "max"
+    const val SPLASH_SEEN_KEY = "splash_screen_seen"
 
     // Work Manager stuff
     const val CRYPTO_WORKER_NAME = "crypto_worker"

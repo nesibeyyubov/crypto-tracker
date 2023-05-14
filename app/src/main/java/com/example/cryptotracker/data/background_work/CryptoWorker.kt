@@ -57,6 +57,8 @@ class CryptoWorker @AssistedInject constructor(
                 currencies = Constants.USD
             ).toUiModel()
 
+            Log.d("mytag", "doWork: started ${response}")
+
             response.coins.forEach {
                 val minMaxValue = preferencesDataStore.getMinMaxValues(it).first()
                 if (minMaxValue != null) {
@@ -72,7 +74,7 @@ class CryptoWorker @AssistedInject constructor(
 
             return Result.success()
         } catch (e: Exception) {
-            Log.d("mytag", "doWork: ${e.message}")
+            Log.d("mytag", "${e.message}")
             return Result.failure()
         }
 
