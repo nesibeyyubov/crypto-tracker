@@ -20,4 +20,9 @@
         android:name="com.example.cryptotracker.ui.min_max.MinMaxFragment"
         android:label="MinMaxFragment"
         tools:layout="@layout/fragment_min_max_rate" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.cryptotracker.ui.history.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history" />
 </navigation>

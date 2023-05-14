@@ -1,5 +1,6 @@
 package com.example.cryptotracker.ui.min_max
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -15,6 +16,7 @@ import com.example.cryptotracker.utils.Constants.CRYPTO_WORKER_NAME
 import com.example.cryptotracker.utils.CryptoNotificationManager
 import com.example.cryptotracker.utils.inMoneyFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -27,28 +29,19 @@ import javax.inject.Inject
 @HiltViewModel
 class MinMaxViewmodel @Inject constructor(
     private val preferencesDataStore: PreferencesDataStore,
-    private val workManager: WorkManager,
     private val notificationManager: CryptoNotificationManager
 ) : BaseViewModel<MinMaxState>(MinMaxState()) {
 
-    private fun startTrackingCryptoRates(message: String) {
-        val constraints = Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
-        val request = PeriodicWorkRequest.Builder(CryptoWorker::class.java, 15L, TimeUnit.MINUTES)
-            .setConstraints(constraints)
-            .build()
-        workManager.enqueueUniquePeriodicWork(
-            CRYPTO_WORKER_NAME,
-            ExistingPeriodicWorkPolicy.UPDATE,
-            request
-        )
-        notificationManager.showBackgroundWorkStarted(message)
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        Log.d("ERROR", throwable.message.toString())
     }
 
     fun saveMinMax(coin: Coin, min: Float, max: Float) {
-        startTrackingCryptoRates(
-            "You will receive notification when ${coin.name} is between range [${min.inMoneyFormat()}$-${max.inMoneyFormat()}$]",
+        notificationManager.showBackgroundWorkStarted(
+            "You will receive notification when ${coin.name} is between range [${min.inMoneyFormat()}$-${max.inMoneyFormat()}$]"
         )
-        viewModelScope.launch {
+
+        viewModelScope.launch(coroutineExceptionHandler) {
             preferencesDataStore.setMinMax(coin, min, max)
         }
     }

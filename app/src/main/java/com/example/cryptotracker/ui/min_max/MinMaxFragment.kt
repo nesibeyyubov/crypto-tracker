@@ -11,7 +11,9 @@ import com.example.cryptotracker.databinding.FragmentMinMaxRateBinding
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import com.example.cryptotracker.R
 import com.example.cryptotracker.data.models.Coin
 import com.example.cryptotracker.data.models.percentageColor
 import com.example.cryptotracker.utils.Constants.KEY_COIN
@@ -67,16 +69,14 @@ class MinMaxFragment : BaseFragment<FragmentMinMaxRateBinding, MinMaxState, MinM
             }
         }
 
+        ivHistory.setOnClickListener { navigate(R.id.historyFragment, bundleOf(KEY_COIN to coin)) }
+
     }
 
     override fun render(state: MinMaxState) = with(binding) {
         if (state.minMax != null) {
-            if (state.minMax.min > 0f) {
-                etMin.setText(state.minMax.min.toString())
-            }
-            if (state.minMax.max > 0f) {
-                etMax.setText(state.minMax.max.toString())
-            }
+            etMin.setText(state.minMax.min.toString())
+            etMax.setText(state.minMax.max.toString())
         }
     }
 }

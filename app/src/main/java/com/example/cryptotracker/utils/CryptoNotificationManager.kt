@@ -44,7 +44,7 @@ class CryptoNotificationManager @Inject constructor(
         notificationManager.notify(CRYPTO_RATE_TRACKING_STARTED_ID, backgroundWorkNotification)
     }
 
-    fun showCryptoRateChanged(message: String) {
+    fun showCryptoRateChanged(notificationId: Int, message: String) {
         val cryptoRateChangedNotification = NotificationCompat.Builder(context, CRYPTO_RATE_CHANGED_CHANNEL_ID)
             .setContentTitle("Wohoo! Crypto rate changed!")
             .setContentText(message)
@@ -61,7 +61,7 @@ class CryptoNotificationManager @Inject constructor(
                 )
             )
         }
-        notificationManager.notify(CRYPTO_RATE_CHANGED_ID, cryptoRateChangedNotification)
+        notificationManager.notify(notificationId, cryptoRateChangedNotification)
     }
 
 

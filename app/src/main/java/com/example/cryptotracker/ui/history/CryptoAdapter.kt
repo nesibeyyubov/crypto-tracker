@@ -1,8 +1,9 @@
-package com.example.cryptotracker.ui.home
+package com.example.cryptotracker.ui.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import com.example.cryptotracker.data.models.Coin
 import com.example.cryptotracker.data.models.percentageColor
 import com.example.cryptotracker.databinding.ItemCoinBinding
 import com.example.cryptotracker.utils.inMoneyFormat
+import com.example.cryptotracker.utils.toDate
 import java.text.DecimalFormat
 
 class CryptoAdapter : ListAdapter<Coin, CryptoAdapter.CoinViewHolder>(CoinDiffCallback()) {
@@ -34,6 +36,10 @@ class CryptoAdapter : ListAdapter<Coin, CryptoAdapter.CoinViewHolder>(CoinDiffCa
         fun bindData(coin: Coin) = with(binding) {
             tvCoin.text = coin.name
             ivIcon.setImageResource(coin.type.drawable)
+            groupDate.isVisible = true
+
+            tvDate.text = coin.lastUpdatedAt.toDate()
+
             tvCoinCurrency.text = "${coin.usd.inMoneyFormat()}$"
             val sign = if (coin.usd24hChange > 0) "+" else ""
             tvCoinIncDec.text = "$sign${DecimalFormat("#.##").format(coin.usd24hChange)}%"

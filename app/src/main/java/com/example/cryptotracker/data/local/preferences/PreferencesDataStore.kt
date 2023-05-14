@@ -43,7 +43,7 @@ class PreferencesDataStore @Inject constructor(@ApplicationContext context: Cont
         }
     }
 
-    fun getMinMaxValues(coin: Coin): Flow<MinMaxRate> {
+    fun getMinMaxValues(coin: Coin): Flow<MinMaxRate?> {
         return dataStore.data.map {
             val minMaxString = when (coin.type) {
                 CoinType.Bitcoin -> it[bitcoinKey]
@@ -54,7 +54,7 @@ class PreferencesDataStore @Inject constructor(@ApplicationContext context: Cont
             if (minMaxValues.isNotEmpty()) {
                 return@map MinMaxRate(minMaxValues[0], minMaxValues[1])
             } else {
-                return@map MinMaxRate(0f, 0f)
+                return@map null
             }
         }
     }

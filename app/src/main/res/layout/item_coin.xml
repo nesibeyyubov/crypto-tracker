@@ -5,15 +5,14 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     android:background="@drawable/coin_bg"
-    android:clickable="true">
+    android:clickable="true"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/iv_icon"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_margin="12dp"
         android:src="@drawable/ic_bitcoin"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +46,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
         android:text="47,412.65"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -65,5 +63,29 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_icon"
         app:layout_constraintEnd_toEndOf="@id/tv_coin_currency" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="divider,tv_date" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="#3B3B3B"
+        app:layout_constraintTop_toBottomOf="@id/iv_icon" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="16.03.22"
+        android:textColor="#8F8F8F"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
