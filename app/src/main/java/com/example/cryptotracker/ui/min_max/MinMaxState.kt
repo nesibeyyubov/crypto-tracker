@@ -6,5 +6,6 @@ import com.example.cryptotracker.data.local.preferences.MinMaxRate
 
 data class MinMaxState(
     val loading: Boolean = false,
-    val minMax: MinMaxRate? = null
+    val minMax: MinMaxRate? = null,
+    val error: String? = null
 ) : State

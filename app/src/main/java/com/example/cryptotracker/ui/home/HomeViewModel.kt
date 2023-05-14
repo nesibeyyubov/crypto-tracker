@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(
                 setState { it.copy(loading = false, coins = response.coins) }
             }
             .catch {
-                Log.d("mytag", "error: $it")
+                setState { it.copy(loading = false, error = it.error) }
             }
             .launchIn(viewModelScope)
     }

@@ -47,7 +47,7 @@
         android:layout_marginTop="16dp"
         android:alpha="0"
         android:paddingHorizontal="16dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do."
+        android:text="On this application, you can track crypto rates and set an alert for specific price range"
         android:textColor="#8A929A"
         android:textSize="18sp"
         android:translationX="-100dp"

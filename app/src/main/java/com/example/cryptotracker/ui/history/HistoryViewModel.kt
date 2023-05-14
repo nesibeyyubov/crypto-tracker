@@ -23,7 +23,7 @@ class HistoryViewModel @Inject constructor(
                 setState { it.copy(loading = false, coins = response.coins.reversed()) }
             }
             .catch {
-
+                setState { it.copy(loading = false, error = it.error) }
             }
             .launchIn(viewModelScope)
     }

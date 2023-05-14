@@ -50,7 +50,9 @@ class MinMaxViewmodel @Inject constructor(
         preferencesDataStore.getMinMaxValues(coin)
             .onStart { setState { it.copy(loading = true) } }
             .onEach { rate -> setState { it.copy(loading = false, minMax = rate) } }
-            .catch { }
+            .catch {
+                setState { it.copy(loading = false, error = it.error) }
+            }
             .launchIn(viewModelScope)
     }
 
